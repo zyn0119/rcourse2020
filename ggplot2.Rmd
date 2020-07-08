@@ -1,0 +1,57 @@
+---
+title: "ggplot2"
+author: "Yining Zhang"
+date: "7/6/2020"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+Learn data visulization with 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(MASS)
+library(conflicted)
+conflict_prefer("select","dplyr")
+```
+
+
+```{r, message = F}
+#National Parks in California
+ca <- read_csv("D:\\R\\ca.csv") 
+
+#Acadia National Park
+acadia <- read_csv("D:\\R\\acadia.csv")
+
+#Southeast US National Parks
+se <- read_csv("D:\\R\\se.csv")
+
+#2016 Visitation for all Pacific West National Parks
+visit_16 <- read_csv("D:\\R\\visit_16.csv")
+
+#All Nationally designated sites in Massachusetts
+mass <- read_csv("D:\\R\\mass.csv")
+
+```
+
+```{r}
+head(ca)
+attach(ca)
+ggplot(data = ca) + 
+  geom_point(aes(x = year, y = visitors))
+
+
+```
+
+
+
+## Including Plots
+
+- *You can also embed plots, for example:*
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
