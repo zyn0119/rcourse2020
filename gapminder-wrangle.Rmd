@@ -31,3 +31,48 @@ lifeBra <- filter(gapminder, country == "Brazil", year >= 1987, year <= 2007)
 mean(lifeBra$lifeExp)
 ```
 
+```{r}
+gap_cambodia  <- gapminder %>%   filter(country == "Cambodia") %>%  dplyr::select(-continent, -lifeExp)
+gap_cambodia
+```
+
+```{r}
+gapminder %>% filter(continent == "Asia", year == 2007) %>% mutate(pop1000 = pop / 1000)
+```
+
+```{r}
+gapminder %>%  filter(year == 2002) %>%  group_by(continent) %>%   mutate(cont_pop = sum(pop))
+```
+
+```{r}
+gapminder %>%  group_by(continent) %>%  summarize(cont_pop = sum(pop)) %>%  ungroup()
+```
+
+```{r}
+continent_pop <- gapminder %>%  group_by(continent, year) %>%  summarize(cont_pop = sum(pop))
+
+continent_pop %>% ggplot(aes(x = year, 
+                             y = cont_pop,
+                             color = continent))+ geom_line()
+```
+
+
+```{r}
+gapminder %>%  group_by(continent, year) %>%  summarize(cont_pop = sum(pop)) %>%  arrange(year)
+```
+
+```{r}
+gapminder %>% group_by(continent,year) %>% 
+  mutate(GDP = pop * gdpPercap) %>% 
+  summarise(maxGDP = max(GDP))
+```
+
+```{r}
+gapminder %>% arrange(desc(year))
+```
+
+```{r}
+gapdesc <- gapminder %>% arrange(desc(country))
+gapdesc %>% filter(continent =='Asia') %>% group_by(year) %>% summarize(maxlife = max(lifeExp)) %>% ungroup()
+```
+
